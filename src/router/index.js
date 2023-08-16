@@ -2,7 +2,11 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import Produk from "../views/Produk.vue"
+import Produk from "../views/Produk.vue";
+import SingleProduk from "../views/SingleProduk.vue";
+import Cart from "../views/Cart.vue";
+import Checkout from "../views/Checkout.vue"
+import Contact from "../views/Contact.vue";
 
 const routes = [
     {
@@ -26,6 +30,27 @@ const routes = [
         name: "Produk",
         component: Produk,
     },
+    {
+        path: "/singleproduk",
+        name: "SingleProduk",
+        component: SingleProduk,
+    },
+    {
+        path: "/cart",
+        name: "Cart",
+        component: Cart,
+    },
+    {
+        path: "/checkout",
+        name: "Checkout",
+        component: Checkout,
+    },
+    {
+        path: "/contact",
+        name: "Contact",
+        component: Contact,
+    },
+    
 ];
 
 const router = createRouter({
