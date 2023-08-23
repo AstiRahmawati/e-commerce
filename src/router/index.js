@@ -5,8 +5,11 @@ import Register from "../views/Register.vue";
 import Produk from "../views/Produk.vue";
 import SingleProduk from "../views/SingleProduk.vue";
 import Cart from "../views/Cart.vue";
-import Checkout from "../views/Checkout.vue"
+import Checkout from "../views/Checkout.vue";
 import Contact from "../views/Contact.vue";
+import Merk from "../views/Merk.vue";
+import Kategori from "../views/Kategori.vue";
+import Profile from "../views/Profile.vue"
 
 const routes = [
     {
@@ -24,6 +27,7 @@ const routes = [
         path: "/register",
         name: "Register",
         component: Register,
+        meta: {requireGuest: true},
     },
     {
         path: "/produk",
@@ -50,7 +54,21 @@ const routes = [
         name: "Contact",
         component: Contact,
     },
-    
+    {
+        path: "/merk",
+        name: "Merk",
+        component: Merk,
+    },
+    {
+        path: "/kategori",
+        name: "Kategori",
+        component: Kategori,
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
+    },
 ];
 
 const router = createRouter({
