@@ -33,8 +33,28 @@ const auth = {
         return false;
       }
     },
-    // info user
-    async getUserInfo({state}) {
+    async register({ commit }, credentials) {
+      try {
+        const response = await axios.post(
+          "https://ecommerce.olipiskandar.com/api/v1/auth/signup",
+          credentials
+        );
+
+        const token = response.data.access_token;
+        // Save token to localStorage
+        localStorage.setItem("token", token);
+        commit("SET_TOKEN", token);
+        commit("SET_REGISTER_ERROR", null);
+        console.log("Token saved:", token);
+        return true;
+      } catch (error) {
+        const errorMessage = error.response.data.message || "Register Failed";
+        commit("SET_REGISTER_ERROR", errorMessage); //set error message in store
+        console.error(error);
+        return false;
+      }
+    },
+    async getUserInfo({ state }) {
       try {
         const response = await axios.get(
           "https://ecommerce.olipiskandar.com/api/v1/user/info",
@@ -44,12 +64,28 @@ const auth = {
             },
           }
         );
-      return response.data.user;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  },
+        return response.data.user;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+    async getUserAddress({ state }) {
+      try {
+        const response = await axios.get(
+          "https://ecommerce.olipiskandar.com/api/v1/user/addresses",
+          {
+            headers: {
+              Authorization: `Bearer ${state.token}`,
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
 
     logout({ commit }) {
       // Remove token from localStorage
@@ -68,10 +104,13 @@ const auth = {
     SET_LOGIN_ERROR(state, error) {
       state.loginError = error;
     },
+    SET_REGISTER_ERROR(state, error) {
+      state.registerError = error;
+    },
     SET_USER(state, user) {
       state.user = user;
-      // console.log("User data stored in store", user);
-    },
+      // console.log("User data stored in store:", user);
+    }
   },
 };
 

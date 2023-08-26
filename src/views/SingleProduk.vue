@@ -49,15 +49,15 @@
                               <div class="flex flex-row items-start lg:flex-col">
                                   <button type="button"
                                       class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center">
-                                      <img class="h-full w-full object-cover" src="../assets/blush on2.jpg" alt="" />
-                                  </button>
-                                  <button type="button"
-                                      class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                                      <img class="h-full w-full object-cover" src="../assets/cushion.jpg" alt="" />
+                                      <img class="h-full w-full object-cover" src="../assets/cons3.jpg" alt="" />
                                   </button>
                                   <button type="button"
                                       class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
                                       <img class="h-full w-full object-cover" src="../assets/highlighter.jpg" alt="" />
+                                  </button>
+                                  <button type="button"
+                                      class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
+                                      <img class="h-full w-full object-cover" src="../assets/lip gloss2.jpg" alt="" />
                                   </button>
                               </div>
                           </div>
@@ -120,18 +120,30 @@
                               <h1 class="text-3xl font-bold">${{ product.base_price }}</h1>
                              
                           </div>
+                          <div v-if="token">
+                <button type="button"
+                  class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  + Keranjang
+                </button>
+              </div>
 
-                          <button type="button"
-                              class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
-                                  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                              </svg>
-                              <a href="/cart">Add to cart</a>
-                          </button>
-                      </div>
-
+              <div v-else>
+              <router-link to="/login">
+                <button type="button"
+                  class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  + keranjang
+                </button>
+              </router-link>
+            </div>
+            </div>
                       <ul class="mt-8 space-y-2">
                           <li class="flex items-center text-left text-sm font-medium text-gray-600">
                               <svg class="mr-2 block h-5 w-5 align-middle text-gray-500"
@@ -187,10 +199,15 @@
   </section>
 </template>
 
-<script>
+<!-- <script>
 import { mapGetters, mapActions} from "vuex";
 
 export default {
+    data() {
+        return {
+            token: null
+        }
+    },
   computed: {
       ...mapGetters("product", ["getProdukBySlug"]),
       product() {
@@ -199,17 +216,79 @@ export default {
   },
   methods: {
       ...mapActions("product", ["fetchSingleProduk"]),
-      ...mapActions("product",["fetchProduk"])
-      
+      ...mapActions("product",["fetchProduk"]),
+      ...mapActions("keranjang", ["fetchKeranjang"])
   },
   beforeMount(){
-    this.fetchProduk()
+    this.fetchProduk();
+    this.fetchKeranjang()
   },
   mounted(){
     const produkSlug = this.$route.params.slug;
-    this.fetchSingleProduk(produkSlug)
-  }
+    this.fetchSingleProduk(produkSlug);
+
+    //cek token 
+    const cektoken = localStorage.getItem('token');
+    this.token = cektoken
+  },
   
+};
+</script> -->
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+    data() {
+        return {
+            token: null,
+            cek: 1
+        }
+    },
+    computed: {
+        ...mapGetters("product", ["getProductBySlug"]),
+        product() {
+            return this.getProdukBySlug(this.$route.params.slug);
+        },
+    },
+    methods: {
+        ...mapActions("product", ["fetchSingleProduct"]),
+        ...mapActions('product', ['fetchProduk']),
+
+        // cart
+        ...mapActions('cart', ['fetchCart']),
+
+
+        // add to cart
+        ...mapActions('product', ['addToCart']),
+
+
+        capitalizeFirstLetter(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        },
+        tambah() {
+            this.cek++
+        },
+        kurang() {
+            if (this.cek > 1) {
+                this.cek--
+            }
+
+        }
+    },
+    beforeMount() {
+        this.fetchProduk()
+        this.fetchCart()
+    },
+    mounted() {
+        const product_slug = this.$route.params.slug;
+        console.log("Fetching single product with Slug:", product_slug);
+        this.fetchSingleProduk(product_slug);
+
+        // Authtentication Token
+        const cekToken = localStorage.getItem("token")
+        this.token = cekToken
+    },
 
 };
 </script>
