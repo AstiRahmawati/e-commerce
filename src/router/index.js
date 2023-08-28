@@ -9,7 +9,8 @@ import Checkout from "../views/Checkout.vue";
 import Contact from "../views/Contact.vue";
 import Merk from "../views/Merk.vue";
 import Kategori from "../views/Kategori.vue";
-import Profile from "../views/Profile.vue"
+import Profile from "../views/Profile.vue";
+import PageOrder from "../views/PageOrder.vue"
 
 const routes = [
     {
@@ -70,6 +71,12 @@ const routes = [
         name: "Profile",
         component: Profile,
     },
+    {
+        path:"/order/:orderCode",
+        name: "PageOrder",
+        component: PageOrder,
+        props: true,
+    },
 ];
 
 const router = createRouter({
@@ -92,5 +99,16 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
+function cekToken(to, from, next) {
+    var isAuthenticated = false;
+    if (localStorage.getItem("token")) isAuthenticated = true;
+    else isAuthenticated = false;
+    if (isAuthenticated) {
+      next();
+    } else {
+      next("/login");
+    }
+  }
 
 export default router;

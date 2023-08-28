@@ -36,20 +36,19 @@
                         <a href="#"
                             class="flex cursor-pointer items-center gap-2 text-indigo-500 no-underline hover:text-indigo-500">
                             <span
-                                class="flex-shrink-0 text-3xl font-black lowercase tracking-tight opacity-100">KCStore</span>
+                                class="flex-shrink-0 text-3xl font-black tracking-tight opacity-100">Login</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2 font-medium text-gray-700 xl:text-xl">Welcome to KCStore!</h4>
+                    <h4 class="mb-2 font-medium text-gray-700 xl:text-xl">Welcome to Esqa !</h4>
                     <p class="mb-6 text-gray-500">Please sign-in to access your account</p>
 
                     <form id="" class="mb-4" @submit.prevent="performLogin">
                         <div class="mb-4">
-                            <label for="email" class="mb-2 inline-block text-xs font-medium uppercase text-gray-700">Email
-                                or Username</label>
+                            <label for="email" class="mb-2 inline-block text-xs font-medium uppercase text-gray-700">Email</label>
                             <input type="text"
                                 class="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
-                                id="email" v-model="email" placeholder="Enter your email or email" autofocus="" />
+                                id="email" v-model="email" placeholder="Enter your email" autofocus="" />
                         </div>
                         <div class="mb-4">
                             <div class="flex justify-between">
@@ -65,6 +64,12 @@
                                     class="relative block flex-auto cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
                                     v-model="password" placeholder="············" />
                             </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="alamat" class="mb-2 inline-block text-xs font-medium uppercase text-gray-700">Alamat</label>
+                            <input type="text"
+                                class="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
+                                id="alamat" v-model="alamat" placeholder="Enter your alamat" autofocus="" />
                         </div>
                         <div class="mb-4">
                             <div class="block">
@@ -84,7 +89,7 @@
                     </form>
 
                     <p class="mb-4 text-center">
-                        New on kcstore?
+                        New on Esqa?
                         <a href="/register" class="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"> Create an
                             account </a>
                     </p>
@@ -103,6 +108,7 @@ export default {
         return {
             email: '',
             password: '',
+            alamat: '',
         };
     },
     computed: {
@@ -114,6 +120,7 @@ export default {
             const credentials = {
                 email: this.email,
                 password: this.password,
+                alamat: this.alamat,
             };
 
             const success = await this.login(credentials);

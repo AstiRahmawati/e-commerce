@@ -140,7 +140,7 @@
                         <div
                             class="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
                             <div class="flex items-end">
-                                <h1 class="text-3xl font-bold">${{ product.base_price }}</h1>
+                                <h1 class="text-3xl font-bold">Rp.{{ product.base_price }}</h1>
                                 <!-- <span class="text-base">/month</span> -->
                             </div>
                             <div v-if="token">
