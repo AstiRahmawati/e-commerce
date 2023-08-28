@@ -65,12 +65,12 @@
                                     v-model="password" placeholder="············" />
                             </div>
                         </div>
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <label for="alamat" class="mb-2 inline-block text-xs font-medium uppercase text-gray-700">Alamat</label>
                             <input type="text"
                                 class="block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow"
                                 id="alamat" v-model="alamat" placeholder="Enter your alamat" autofocus="" />
-                        </div>
+                        </div> -->
                         <div class="mb-4">
                             <div class="block">
                                 <input
