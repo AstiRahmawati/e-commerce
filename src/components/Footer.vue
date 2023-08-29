@@ -6,7 +6,7 @@
     <a href="#" class="font-medium text-white">Privacy Policy</a>
     <a href="#" class="font-medium text-white">Terms & Conditions</a>
   </nav>
-  <p class="py-10 text-center text-gray-300">© 2022 Boleno | All Rights Reserved</p>
+  <p class="py-10 text-center text-gray-300">© 2023 Boleno | All Rights Reserved</p>
 </footer>
 
 </template>
