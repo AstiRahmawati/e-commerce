@@ -105,7 +105,7 @@
                     </label>
                 </div>
                 <div class="relative">
-                    <input class="peer hidden" id="radio_4" type="radio" value="cash_on_delivery" v-model="deliveryType" />
+                    <input class="peer hidden" id="radio_4" type="radio" value="payment_wallet" v-model="paymentType" />
                     <span
                         class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                     <label
@@ -139,7 +139,7 @@
                         </svg>
                     </div>
                 </div>
-                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Alamat</label>
+                <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Alamat Pengirim</label>
                 <div class="relative">
                     <input type="text" id="card-holder" name="card-holder"
                         class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
